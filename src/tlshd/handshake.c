@@ -158,6 +158,7 @@ void tlshd_service_socket(void)
 	case HANDSHAKE_MSG_TYPE_CLIENTHELLO:
 		switch (parms.ip_proto) {
 		case IPPROTO_TCP:
+		case IPPROTO_MPTCP:
 			tlshd_tls13_clienthello_handshake(&parms);
 			break;
 #ifdef HAVE_GNUTLS_QUIC
@@ -173,6 +174,7 @@ void tlshd_service_socket(void)
 	case HANDSHAKE_MSG_TYPE_SERVERHELLO:
 		switch (parms.ip_proto) {
 		case IPPROTO_TCP:
+		case IPPROTO_MPTCP:
 			tlshd_tls13_serverhello_handshake(&parms);
 			break;
 #ifdef HAVE_GNUTLS_QUIC
