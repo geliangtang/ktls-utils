@@ -133,6 +133,17 @@ if test "x$have_tls_tx_max_payload_len" = xyes ; then
 	AC_DEFINE([HAVE_TLS_TX_MAX_PAYLOAD_LEN], [1], [Define to 1 if linux/tls.h defines TLS_TX_MAX_PAYLOAD_LEN])
 fi
 
+AC_MSG_CHECKING(for IPPROTO_MPTCP in netinet/in.h)
+AC_COMPILE_IFELSE(
+	[AC_LANG_PROGRAM([[ #include <netinet/in.h> ]],
+		[[ int foo = IPPROTO_MPTCP; ]])],
+	[ have_ipproto_mptcp=yes ],
+	[ have_ipproto_mptcp=no ])
+AC_MSG_RESULT([$have_ipproto_mptcp])
+if test "x$have_ipproto_mptcp" = xyes ; then
+	AC_DEFINE([HAVE_IPPROTO_MPTCP], [1], [Define to 1 if netinet/in.h defines IPPROTO_MPTCP])
+fi
+
 AC_SUBST([AM_CPPFLAGS])
 
 AC_CONFIG_FILES([Makefile \
